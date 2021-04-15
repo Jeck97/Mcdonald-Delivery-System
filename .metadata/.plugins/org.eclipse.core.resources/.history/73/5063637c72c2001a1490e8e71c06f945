@@ -1,0 +1,30 @@
+package controller.validator;
+
+import controller.facade.CustomerFacade;
+import controller.validator.exception.LoginFailedException;
+import model.Customer;
+
+public class Validator {
+
+	
+	/**
+	 * This static method validates the login process of the visitor
+	 * @param customer
+	 * @return Validated customer
+	 * @throws LoginFailedException
+	 */
+	public static Customer validateLogin(Customer customer) throws LoginFailedException {
+		
+		// Get the customer from database by username and password
+		CustomerFacade customerFacade = new CustomerFacade();
+		Customer dbCustomer = customerFacade.selectCustomer(customer);
+		
+		// Throw exception if the customer not found in database
+		if(dbCustomer.getId() == 0)
+			throw new LoginFailedException();
+		
+		return dbCustomer;
+		
+	}
+
+}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Logout Page</title>
+</head>
+<body>
+
+	<h3>Are you sure want to logout from McDelivery?</h3>
+	
+	<a href="/McDelivery/login/loginForm.jsp"><button>Yes</button></a>
+	
+	&nbsp; &nbsp;
+	
+	<a href="../.."><button>No</button></a>
+
+</body>
+</html>

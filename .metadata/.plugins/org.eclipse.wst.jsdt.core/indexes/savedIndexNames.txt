@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+C:\Users\USER\BITP 3123 Final Assessment 2\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3160186449.index
+80060168.index
+2645462329.index
+1893102405.index
+3786068601.index
+2188509944.index
+3872108493.index

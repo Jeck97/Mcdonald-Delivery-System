@@ -1,0 +1,41 @@
+package bank.rest.controller.generator;
+
+import bank.rest.model.Bank;
+
+
+/**
+ * This class generates the bank data
+ * @author Tiang King Jeck
+ *
+ */
+public class BankDataGenerator {
+	
+	
+	/**
+	 * This class instantiates a new bank object
+	 * @param bankName
+	 * @return instantiated bank object
+	 */
+	private Bank getInstantiatedBank(String bankName) {
+		
+		Bank bank = new Bank();
+		bank.setName(bankName);
+		
+		return bank;
+		
+	}
+
+	
+	/**
+	 * This class generates Maybank
+	 * @return bank
+	 */
+	protected Bank getMaybank() {
+		
+		return this.getInstantiatedBank("Maybank");
+		
+	}
+	
+
+	
+}

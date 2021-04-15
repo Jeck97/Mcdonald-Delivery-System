@@ -1,0 +1,35 @@
+package bank.rest.controller.service;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+
+import bank.rest.model.Account;
+
+
+/**
+ * This class represent the service provides through the web.
+ * 
+ * This class tells the framework when the URI is -> http://localhost:8080/BankServiceProvider/services/bank
+ * it is referring to all the services declared in this class.
+ * 
+ * @author Tiang King Jeck
+ *
+ */
+@Path("/bank")
+public class BankService {
+	
+	@POST
+	@Path("/transaction")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Account transaction(@QueryParam("amount") double amount, Account account) {
+		
+		return null;
+		
+	}
+	
+
+}

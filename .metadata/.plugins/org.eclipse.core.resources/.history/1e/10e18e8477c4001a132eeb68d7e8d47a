@@ -1,0 +1,11 @@
+package mcdelivery.controller.handler;
+
+import javax.ws.rs.client.Client;
+
+
+public class BankServiceHandler {
+	
+	private Client client;
+	
+
+}

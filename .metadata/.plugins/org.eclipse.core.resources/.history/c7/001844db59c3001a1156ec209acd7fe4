@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Logout Page</title>
+</head>
+<body>
+
+	<h3>Are you sure want to logout from McDelivery?</h3>
+	
+	<form action="logoutServlet" method="post">
+		<p><input type="submit" id="yes"></p>
+	</form>
+	
+	<label for="yes"><button>Yes</button></label> &nbsp;
+	
+	<a href="<%= request.getAttribute("tracedPath") %>"><button>No</button></a>
+	
+</body>
+</html>

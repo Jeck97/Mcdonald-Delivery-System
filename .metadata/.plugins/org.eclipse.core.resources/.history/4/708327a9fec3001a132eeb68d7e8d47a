@@ -1,0 +1,28 @@
+package bank.rest.controller.generator;
+
+import bank.rest.model.Account;
+
+
+/**
+ * This class generates the account data
+ * @author Tiang King Jeck
+ *
+ */
+public class AccountDataGenerator {
+	
+	
+	/**
+	 * This method generate bank account of Tiang
+	 * This account represents a rich account
+	 * @return
+	 */
+	public Account getTiangAccount() {
+		
+		Account account = new Account();
+		account.setAccountNumber(80803123);
+		account.setHolderName("Tiang King Jeck");
+		account.setBalanceAmount(9999999999.99);
+		
+	}
+
+}

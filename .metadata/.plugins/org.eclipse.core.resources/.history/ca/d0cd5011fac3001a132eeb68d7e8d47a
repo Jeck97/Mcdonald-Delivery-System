@@ -1,0 +1,28 @@
+package bank.rest.model;
+
+public class Account {
+	
+	private long accountNumber;
+	private String holderName;
+	private double balanceAmount;
+	
+	public long getAccountNumber() {
+		return accountNumber;
+	}
+	public void setAccountNumber(long accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+	public String getHolderName() {
+		return holderName;
+	}
+	public void setHolderName(String holderName) {
+		this.holderName = holderName;
+	}
+	public double getBalanceAmount() {
+		return balanceAmount;
+	}
+	public void setBalanceAmount(double balanceAmount) {
+		this.balanceAmount = balanceAmount;
+	}
+
+}

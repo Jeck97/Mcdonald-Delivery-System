@@ -1,0 +1,98 @@
+package controller.servlet;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import controller.handler.PaymentHandler;
+import model.Customer;
+import model.Order;
+
+/**
+ * Servlet implementation class PaymentServlet
+ */
+@WebServlet("/placeOrder/paymentServlet")
+public class PaymentServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public PaymentServlet() {
+        super();
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// Get data from request
+		HttpSession session = request.getSession();
+		Customer customer = (Customer) session.getAttribute("customer");
+		Order order = (Order) session.getAttribute("order");
+		
+		// Initialize the order number
+		int orderNumber = 0;
+		
+		// Instantiate the payment handler to handle payment
+		PaymentHandler paymentHandler = new PaymentHandler();
+		
+		// Get payment method from form
+		int paymentMethod = Integer.parseInt
+				(request.getParameter("payment_method").toString());
+		
+		if(paymentMethod == PaymentHandler.MCWALLET) {
+			
+			boolean suffient = Boolean.parseBoolean(
+					session.getAttribute("sufficient").toString());
+			
+			if(suffient) {
+				
+				// Set the payment method of order
+				order.setPaymentMethod(paymentMethod);
+				
+				// Process the payment
+				orderNumber = paymentHandler.processPayment(customer, order);
+				
+			} else {
+				
+				// Redirect to insufficient balance page 
+				response.sendRedirect("insufficientBalancePage.html");
+				
+				return;
+				
+			}
+			
+			
+		} else if(paymentMethod == PaymentHandler.INTERBANK) {
+			
+			// call bank service to pay
+			
+			// if success
+			
+			
+		}
+		
+		// Set order number into session
+		session.setAttribute("orderNumber", orderNumber);
+		
+		// Redirect to receipt page
+		response.sendRedirect("recieptOrderPage.jsp");
+		
+		
+	}
+
+}

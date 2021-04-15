@@ -1,0 +1,8 @@
+package controller.handler;
+
+public class PaymentHandler {
+	
+	public static final int MCWALLET = 1;
+	public static final int INTERBANK = 2;
+
+}

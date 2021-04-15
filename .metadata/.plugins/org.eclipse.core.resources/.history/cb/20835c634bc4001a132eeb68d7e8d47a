@@ -1,0 +1,45 @@
+package bank.rest.controller.validator;
+
+import bank.rest.model.Account;
+
+public class TransactionValidator {
+	
+	// Account involved in transaction
+	private Account account;
+	
+	
+	/**
+	 * This constructor initializes account that used in transaction
+	 * @param account
+	 */
+	public TransactionValidator(Account account) {
+		
+		this.account = account;
+		
+	}
+	
+	
+	/**
+	 * This method validates the password for transaction account
+	 * @param password
+	 * @return true if password is correct
+	 */
+	public boolean isPasswardMatch(String password) {
+		
+		return password.equals(account.getPassword());
+		
+	}
+	
+	
+	/**
+	 * This method validates the sufficiency of account balance to process the transaction
+	 * @param amountToPay
+	 * @return true if the account balance is sufficient
+	 */
+	public boolean isBalanceSufficient(double amountToPay) {
+	
+		return account.getBalanceAmount() >= amountToPay;
+		
+	}
+
+}

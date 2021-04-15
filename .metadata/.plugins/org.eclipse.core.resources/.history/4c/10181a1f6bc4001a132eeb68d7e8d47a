@@ -1,0 +1,51 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Transaction Page</title>
+</head>
+<body>
+
+	<br>
+
+	<hr>
+
+	<h1 style="text-align: center;">Bank Service</h1>
+
+	<hr>
+
+	<br>
+	
+	<div style="color: #FF0000; text-align: center;">haha${errorMessage}</div>
+	
+	<br>
+
+	<form action="transactionServlet" method="post">
+
+		<table style="align-content: space-between; margin: auto; width: 250px; height: 200px;">
+			<tr>
+				<td><label for="account_number">Account Number:</label></td>
+				<td><input id="account_number" name="account_number" type="number" required></td>
+			</tr>
+			<tr>
+				<td><label for="password">Password:</label></td>
+				<td><input id="password" name="password" type="password" required></td>
+			</tr>
+			<tr>
+				<td><label>Amount:</label></td>
+				<td><b>RM 50.00</b></td>
+			</tr>
+		</table>
+		
+		<br><br>
+		
+		<div style="text-align: center;">
+			<input type="submit" value="Transact">
+		</div>
+
+	</form>
+
+</body>
+</html>

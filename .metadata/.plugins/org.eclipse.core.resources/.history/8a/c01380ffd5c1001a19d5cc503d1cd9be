@@ -1,0 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Register Page</title>
+</head>
+<body>
+
+	<h1>McDelivery Registration</h1>
+
+	<form action="RegisterServlet" method="post">
+	
+		<div style="color: #FF0000;">${errorMessage}</div><br>
+	
+		<label>Name:</label> 
+		<input type="text" name="username" value="${username}"><br><br> 
+		
+		<label>Address 1:</label>
+		<input type="password" name="password" value="${password}"><br><br>
+		
+		<label>Address 2:</label> 
+		<input type="text" name="username" value="${username}"><br><br> 
+		
+		<label>Postcode:</label> 
+		<input type="text" name="username" value="${username}"><br><br> 
+		
+		<label>Area:</label> 
+		<input type="text" name="username" value="${username}"><br><br> 
+		
+		<label>State:</label> 
+		<input type="text" name="username" value="${username}"><br><br> 
+		
+		<label>Username:</label> 
+		<input type="text" name="username" value="${username}"><br><br> 
+		
+		<label>Username:</label> 
+		<input type="text" name="username" value="${username}"><br><br> 
+		
+		<label>Password:</label>
+		<input type="password" name="password" value="${password}"><br><br>
+		
+		<label>Confirm Password:</label>
+		<input type="password" name="password" value="${password}"><br><br>
+		
+		<br><br>
+		<input type="submit" value="Register">
+
+	</form>
+
+	<br><a href="../login/loginForm.jsp">Back to Login Page</a>
+
+</body>
+</html>

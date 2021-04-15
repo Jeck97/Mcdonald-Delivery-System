@@ -1,0 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Transaction Page</title>
+</head>
+<body>
+
+	<br>
+
+	<hr>
+
+	<h1 style="text-align: center;">Bank Service</h1>
+
+	<hr>
+
+	<br>
+	<br>
+	<br>
+
+	<form action="transactionServlet" method="post">
+		
+		<label for="account_number" style="text-align: center;">Account Number:</label>
+		<input style="text-align: center;" id="account_number" name="account_number" type="number" required>
+	
+	</form>
+
+</body>
+</html>

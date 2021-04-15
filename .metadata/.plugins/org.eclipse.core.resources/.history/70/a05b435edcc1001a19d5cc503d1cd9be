@@ -1,0 +1,36 @@
+package controller.validator.exception;
+
+/**
+ * This class throws an exception if the field is more than maximum number
+ * @author Tiang King Jeck
+ *
+ */
+public class MaximumNumberException extends Exception {
+
+	private static final long serialVersionUID = 1L;
+	
+	
+	/**
+	 * This constructor is implemented for the field of Integer
+	 * @param field
+	 * @param maximum
+	 */
+	public MaximumNumberException(String field, int maximum) {
+		
+		super(field + " must be not more than " + maximum);
+		
+	}
+	
+	
+	/**
+	 * This constructor is implemented for the field of Double
+	 * @param field
+	 * @param maximum
+	 */
+	public MaximumNumberException(String field, double maximum) {
+		
+		super(field + " must be not more than " + maximum);
+		
+	}
+
+}

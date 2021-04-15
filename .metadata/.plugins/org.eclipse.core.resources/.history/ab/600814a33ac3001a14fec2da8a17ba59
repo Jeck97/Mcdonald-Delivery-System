@@ -1,0 +1,92 @@
+package controller.manager;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import controller.connector.DbConnector;
+import model.Type;
+
+public class TypeDataManager {
+
+	// Declare database connector object
+	private DbConnector dbConn;
+	
+	// Declare closable SQL objects
+	private Connection conn;
+	private PreparedStatement preStmt;
+	private ResultSet results;
+
+	
+	/**
+	 * The constructor initializes the database connector object
+	 */
+	public TypeDataManager() {
+		dbConn = new DbConnector();
+	}
+
+
+	/**
+	 * This method adds a new type into database
+	 * @param type
+	 * @return type ID
+	 */
+	public int addType(Type type) {
+
+		// Define type ID with 0
+		int typeId = 0;
+		
+		// Form a SQL string
+		String sql = "INSERT INTO type(Name) VALUES(?)";
+
+		try {
+			
+			// Establish connection
+			conn = dbConn.getConnection();
+			
+			// Set parameter and execute the SQL
+			preStmt = conn.prepareStatement(sql, 
+					PreparedStatement.RETURN_GENERATED_KEYS);
+			preStmt.setString(1, type.getName());
+			preStmt.executeUpdate();
+			
+			// Get auto generated key
+			results = preStmt.getGeneratedKeys();
+
+			// Set the key as the type ID
+			while(results.next())
+				typeId = results.getInt(1);
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeSqlObjects();
+		}
+		
+		return typeId;
+
+	}
+	
+	
+	/**
+	 * This method closes all closable SQL objects
+	 */
+	private void closeSqlObjects() {
+
+		try {
+
+			if(results != null)
+				results.close();
+			if(preStmt != null)
+				preStmt.close();
+			if(conn != null)
+				conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+}

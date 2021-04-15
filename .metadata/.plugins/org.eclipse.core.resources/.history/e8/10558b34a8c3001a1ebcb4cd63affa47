@@ -1,0 +1,31 @@
+package controller.facade;
+
+import controller.manager.OrderedProductDataManager;
+import model.OrderedProduct;
+
+public class OrderedProductFacade {
+	
+	// Declare OrderedProductDataManager object
+	private OrderedProductDataManager orderedProductDataMgr;
+
+
+	/**
+	 * The constructor initializes the OrderedProductDataManager object
+	 */
+	public OrderedProductFacade() {
+		orderedProductDataMgr = new OrderedProductDataManager();
+	}
+	
+	
+	/**
+	 * This method adds a new orderedProduct into database
+	 * @param orderedProduct
+	 * @return orderedProduct ID
+	 */
+	public int addOrderedProduct(OrderedProduct orderedProduct) {
+		
+		return orderedProductDataMgr.addOrderedProduct(orderedProduct);
+		
+	}
+
+}

@@ -1,0 +1,92 @@
+package controller.manager;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import controller.connector.DbConnector;
+import model.OrderedProduct;
+
+public class OrderedProductDataManager {
+
+	// Declare database connector object
+	private DbConnector dbConn;
+
+	// Declare closable SQL objects
+	private Connection conn;
+	private PreparedStatement preStmt;
+	private ResultSet results;
+
+	/**
+	 * The constructor initializes the database connector object
+	 */
+	public OrderedProductDataManager() {
+		dbConn = new DbConnector();
+	}
+
+
+	/**
+	 * This method adds a new orderedProduct into database
+	 * @param orderedProduct
+	 */
+	public void addOrderedProduct(OrderedProduct orderedProduct, int orderId) {
+
+		// Form a SQL string
+		String sql = "INSERT INTO orderedProduct(OrderedProductBy, AmountBeforeTax, Tax, "
+				+ "AmountAfterTax, PaymentMethod) VALUES(?, ?, ?, ?, ?)";
+
+		try {
+
+			// Establish connection
+			conn = dbConn.getConnection();
+
+			// Set parameters and execute the SQL
+			preStmt = conn.prepareStatement(sql, 
+					PreparedStatement.RETURN_GENERATED_KEYS);
+			preStmt.setInt(1, orderedProduct.getCustomer().getId());
+			preStmt.setDouble(2, orderedProduct.getAmountBeforeTax());
+			preStmt.setDouble(3, orderedProduct.getServiceTax());
+			preStmt.setDouble(4, orderedProduct.getAmountAfterTax());
+			preStmt.setInt(5, orderedProduct.getPaymentMethod());
+			preStmt.executeUpdate();
+
+			// Get auto generated key
+			results = preStmt.getGeneratedKeys();
+
+			// Set the key as the orderedProduct ID
+			while(results.next())
+				orderedProductId = results.getInt(1);
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeSqlObjects();
+		}
+
+		return orderedProductId;
+
+	}
+
+
+	/**
+	 * This method closes all closable SQL objects
+	 */
+	private void closeSqlObjects() {
+
+		try {
+
+			if(results != null)
+				results.close();
+			if(preStmt != null)
+				preStmt.close();
+			if(conn != null)
+				conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+}

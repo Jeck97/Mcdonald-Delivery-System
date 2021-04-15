@@ -1,0 +1,5 @@
+package bank.rest.controller.validator;
+
+public class AccountValidator {
+
+}

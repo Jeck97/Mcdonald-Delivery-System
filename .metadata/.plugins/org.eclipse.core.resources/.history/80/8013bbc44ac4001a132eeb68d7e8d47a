@@ -1,0 +1,137 @@
+package bank.rest.controller.manager;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import bank.rest.controller.generator.AccountDataGenerator;
+import bank.rest.model.Account;
+
+/**
+ * This class manages the accounts in banks.
+ * @author Tiang King Jeck
+ *
+ */
+public class AccountDataManager {
+
+	// Apply static to avoid data redundancy out of sync
+	private static final List<Account> accounts = getBankAccounts();
+	private static Account accountInUsed;
+
+
+	public void updateBankAccountBalance(Account transactionAccount, double amountToPay) {
+
+		for(Account account : accounts) {
+
+			if (transactionAccount.getAccountNumber() 
+					== account.getAccountNumber()) {
+
+				// Compute new balance
+				double newBalance = account.getBalanceAmount() - amountToPay;
+
+				// Round off to two decimal places
+				newBalance = Double.valueOf(new DecimalFormat("#.##").format(newBalance));
+
+				// Update balance
+				account.setBalanceAmount(newBalance);
+				
+				break;
+				
+			}
+
+		}
+
+	}
+
+
+	/**
+	 * This method gets the account by using account number
+	 * @param accountNumber
+	 * @return account with this account number if found, else return null account
+	 */
+	public Account getBankAccount(long accountNumber) {
+
+		for(Account account : accounts) 
+			if (accountNumber == account.getAccountNumber())
+				return account;
+
+		return null;
+
+	}
+	
+	
+	/**
+	 * This method validates the sufficiency of account balance to process the transaction
+	 * @param amountToPay
+	 * @return true if the account balance is sufficient
+	 */
+	public boolean isBalanceSufficient(double amountToPay) {
+		
+		if(accountInUsed == null)
+			return false;
+	
+		return accountInUsed.getBalanceAmount() >= amountToPay;
+		
+	}
+	
+	
+	/**
+	 * This method validates the password for transaction account
+	 * @param password
+	 * @return true if password is correct
+	 */
+	public boolean isPasswardMatch(String password) {
+		
+		if(accountInUsed == null)
+			return false;
+		
+		return accountInUsed.getPassword().equals(password);
+		
+	}
+	
+	
+	/**
+	 * This method validate the existence of account by using account number
+	 * @param accountNumber
+	 * @return true if account is found, otherwise return false
+	 */
+	public boolean isAccountExist(long accountNumber) {
+
+		for(Account account : accounts) {
+			
+			if (accountNumber == account.getAccountNumber()) {
+				
+				// Set the this found account to account in used
+				accountInUsed = account;
+				
+				return true;
+				
+			}
+			
+		}
+
+		return false;
+
+	}
+
+
+	/**
+	 * This method generates a list of accounts with different bank
+	 * @return a list of accounts
+	 */
+	private static List<Account> getBankAccounts() {
+
+		List<Account> accounts = new ArrayList<Account>();
+
+		// Add each generated account into a list
+		AccountDataGenerator accountGenerator = new AccountDataGenerator();
+		accounts.add(accountGenerator.getArthurAccount());
+		accounts.add(accountGenerator.getHatsuneAccount());
+		accounts.add(accountGenerator.getTiangAccount());
+		accounts.add(accountGenerator.getYamamotoAccount());
+
+		return accounts;
+
+	}
+
+}

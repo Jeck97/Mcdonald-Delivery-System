@@ -1,0 +1,5 @@
+package bank.rest.model;
+
+public class Bank {
+
+}

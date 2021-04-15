@@ -1,0 +1,26 @@
+<%@page import="model.Customer"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    
+<%
+	Customer customer = (Customer) request.getSession().getAttribute("customer");
+%>
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Main Page</title>
+</head>
+<body>
+
+	<h1><%= customer.getUsername() %> ,welcome to McDelivery</h1>
+	
+	<hr>
+
+	<div style="text-align: left;"><a href="logout/logoutConfirmation.jsp">Jeck</a></div>
+	<div style="text-align: right;"><a href="logout/logoutConfirmation.jsp">Logout</a></div>
+
+
+</body>
+</html>

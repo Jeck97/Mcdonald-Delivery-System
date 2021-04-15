@@ -1,0 +1,128 @@
+package bank.rest.controller.handler;
+
+import java.text.DecimalFormat;
+import java.util.List;
+
+import bank.rest.controller.manager.AccountDataManager;
+import bank.rest.model.Account;
+
+public class TransactionHandler {
+
+	// Apply static to avoid data redundancy out of sync
+	private static Account accountInUsed;
+
+
+	/**
+	 * This method get the current account in used without password
+	 * @param accountNumber
+	 * @return account in used that without password
+	 */
+	public Account getAccountInUsedExcludePassword() {
+
+		if (accountInUsed == null)
+			return null;
+
+		// Create a new instance instead of assign directly
+		Account account = new Account();
+		account.setAccountNumber(accountInUsed.getAccountNumber());
+		account.setHolderName(accountInUsed.getHolderName());
+		account.setBalanceAmount(accountInUsed.getBalanceAmount());
+		account.setBank(accountInUsed.getBank());
+
+		// Reset the account
+		accountInUsed = null;
+
+		return account;
+
+	}
+
+
+	/**
+	 * This methods update the amount of balance after transaction is completed
+	 * @param transactionAccount
+	 * @param amountToPay
+	 * @return true if updated, otherwise false
+	 */
+	public boolean updateBankAccountBalance(double amountToPay) {
+		
+		if(accountInUsed == null)
+			return false;
+			
+		// Compute new balance
+		double newBalance = accountInUsed.getBalanceAmount() - amountToPay;
+
+		// Round off to two decimal places
+		newBalance = Double.valueOf(new DecimalFormat("#.##").format(newBalance));
+
+		// Update new balance to account in used
+		accountInUsed.setBalanceAmount(newBalance);
+		
+		// Update account in list
+		AccountDataManager accountDataMngr = new AccountDataManager();
+		accountDataMngr.updateAccountInList(accountInUsed);
+		
+		return true;
+
+	}
+
+
+	/**
+	 * This method validates the sufficiency of account balance to process the transaction
+	 * @param amountToPay
+	 * @return true if the account balance is sufficient
+	 */
+	public boolean isBalanceSufficient(double amountToPay) {
+
+		if(accountInUsed == null)
+			return false;
+
+		return accountInUsed.getBalanceAmount() >= amountToPay;
+
+	}
+
+
+	/**
+	 * This method validates the password for transaction account
+	 * @param password
+	 * @return true if password is correct
+	 */
+	public boolean isPasswardMatch(String password) {
+
+		if(accountInUsed == null)
+			return false;
+
+		return accountInUsed.getPassword().equals(password);
+
+	}
+
+
+	/**
+	 * This method validate the existence of account by using account number
+	 * @param accountNumber
+	 * @return true if account is found, otherwise return false
+	 */
+	public boolean isAccountExist(long accountNumber) {
+		
+		// Get the list of accounts
+		AccountDataManager accountDataMngr = new AccountDataManager();
+		List<Account> accounts = accountDataMngr.getAccounts();
+
+		// Loop to find account by comparing account number
+		for(Account account : accounts) {
+
+			if (accountNumber == account.getAccountNumber()) {
+
+				// Set the this found account to account in used
+				accountInUsed = account;
+
+				return true;
+
+			}
+
+		}
+
+		return false;
+
+	}
+
+}

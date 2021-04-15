@@ -1,0 +1,5 @@
+package mcdelivery.model;
+
+public class Account {
+
+}

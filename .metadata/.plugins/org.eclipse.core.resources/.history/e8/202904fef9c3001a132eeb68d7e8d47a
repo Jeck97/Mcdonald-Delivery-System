@@ -1,0 +1,10 @@
+package bank.rest.model;
+
+public class Account {
+	
+	private long accountNumber;
+	private String holderName;
+	private double balanceAmount;
+
+
+}

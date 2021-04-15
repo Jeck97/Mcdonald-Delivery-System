@@ -1,0 +1,86 @@
+package controller.handler;
+
+import java.util.List;
+
+import controller.facade.ProductFacade;
+import model.Order;
+import model.OrderedProduct;
+import model.Product;
+
+/**
+ * This class implements the business logic to handle the order placed 
+ * by the customer.
+ * @author Tiang King Jeck
+ *
+ */
+public class OrderHandler {
+
+	private static final double TAX_RATE = 0.06;
+
+
+	/**
+	 * This method computes the total amount of the order
+	 * @param amountBeforeTax
+	 * @param tax
+	 * @return amount after tax
+	 */
+	private double getAmountAfterTax(double amountBeforeTax, double tax) {
+
+		return amountBeforeTax + tax;
+
+	}
+
+
+	/**
+	 * This method computes tax of a total amount of order
+	 * @param amountBeforeTax
+	 * @return tax
+	 */
+	private double getTax(double amountBeforeTax) {
+
+		return amountBeforeTax * TAX_RATE;
+	}
+
+
+	/**
+	 * This method computes the total amount of placed order
+	 * @param order
+	 * @return computed order
+	 */
+	public Order processOrder(Order order) {
+
+		// Initialize total amount before tax
+		double amountBeforeTax = 0;
+		
+		// Get the ordered products list from order
+		List<OrderedProduct> orderedProducts = order.getOrderedProducts();
+		
+		// Loop for compute total amount before tax
+		for (OrderedProduct orderedProduct : orderedProducts) {
+
+			// Get product information form database
+			ProductFacade productFacade = new ProductFacade();
+			Product product = orderedProduct.getProduct();
+			product = productFacade.selectProduct(product);
+			orderedProduct.setProduct(product);
+
+			// Compute total amount before tax
+			amountBeforeTax += orderedProduct.getSubtotal();
+
+		}
+
+		// Compute total amount
+		double tax = this.getTax(amountBeforeTax);
+		double amountAfterTax = this.getAmountAfterTax(amountBeforeTax, tax);
+
+		// Wrap the into order
+		order.setOrderedProducts(orderedProducts);
+		order.setAmountBeforeTax(amountBeforeTax);
+		order.setServiceTax(tax);
+		order.setAmountAfterTax(amountAfterTax);
+
+		return order;
+
+	}
+
+}

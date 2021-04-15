@@ -1,0 +1,36 @@
+package controller.validator.exception;
+
+/**
+ * This class throws an exception if the field is more than Minimum number
+ * @author Tiang King Jeck
+ *
+ */
+public class MinimumNumberException extends Exception {
+
+	private static final long serialVersionUID = 1L;
+	
+	
+	/**
+	 * This constructor is implemented for the field of Integer
+	 * @param field
+	 * @param Minimum
+	 */
+	public MinimumNumberException(String field, int Minimum) {
+		
+		super(field + " must be not less than " + Minimum);
+		
+	}
+	
+	
+	/**
+	 * This constructor is implemented for the field of Double
+	 * @param field
+	 * @param Minimum
+	 */
+	public MinimumNumberException(String field, double Minimum) {
+		
+		super(field + " must be not less than " + Minimum);
+		
+	}
+
+}

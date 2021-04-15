@@ -1,0 +1,80 @@
+package bank.rest.controller.generator;
+
+import bank.rest.model.Account;
+
+
+/**
+ * This class generates the account data
+ * @author Tiang King Jeck
+ *
+ */
+public class AccountDataGenerator {
+	
+	private BankDataGenerator bankGenerator;
+	
+	
+	/**
+	 * This constructor initializes the bank generator
+	 */
+	public AccountDataGenerator() {
+		
+		bankGenerator = new BankDataGenerator();
+		
+	}
+	
+	
+	/**
+	 * This method generate bank account of Tiang
+	 * This account represents a rich account
+	 * @return Tiang's account
+	 */
+	public Account getTiangAccount() {
+		
+		Account account = new Account();
+		account.setAccountNumber(80803123);
+		account.setHolderName("Tiang King Jeck");
+		account.setPassword("789789");
+		account.setBalanceAmount(9999999999.99);
+		account.setBank(bankGenerator.getPublicBank());
+		
+		return account;
+		
+	}
+	
+	
+	/**
+	 * This method generate bank account of Yamamoto
+	 * This account represents a poor account
+	 * @return Yamamoto's account
+	 */
+	public Account getYamamotoAccount() {
+		
+		Account account = new Account();
+		account.setAccountNumber(30881234);
+		account.setHolderName("Yamamoto Takeshi");
+		account.setBalanceAmount(100.00);
+		account.setBank(bankGenerator.getCimbBank());
+		
+		return account;
+		
+	}
+	
+	
+	/**
+	 * This method generate bank account of King Arthur
+	 * This account represents a normal account
+	 * @return Arthur's account
+	 */
+	public Account getArthurAccount() {
+		
+		Account account = new Account();
+		account.setAccountNumber();
+		account.setHolderName("Yamamoto Takashi");
+		account.setBalanceAmount(100.00);
+		account.setBank(bankGenerator.getCimbBank());
+		
+		return account;
+		
+	}
+
+}

@@ -1,0 +1,67 @@
+<%@page import="mcdelivery.model.Account"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
+<%
+	// Get account for displaying information
+	Account account = (Account) session.getAttribute("account");
+			
+	// Get amount
+	String amount = String.format("%.2f", session.getAttribute("amount"));
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Receipt Page</title>
+</head>
+<body>
+
+
+	<br>
+
+	<hr>
+
+	<h1 style="text-align: center;">Transaction Receipt</h1>
+
+	<h3 style="text-align: center;">Transaction has successfully processed.</h3>
+
+	<hr>
+
+	<table style="align-content: space-between; margin:auto;">
+		<tr>
+			<td>Account Number:</td>
+			<td><b>1235456789</b></td>
+		</tr>
+		<tr>
+			<td>Account Holder:</td>
+			<td><b>Tiang</b></td>
+		</tr>
+		<tr>
+			<td>Bank:</td>
+			<td><b>Pbe</b></td>
+		</tr>
+		<tr>
+			<td>Balance Amount:</td>
+			<td><b>RM 12.36</b></td>
+		</tr>
+		<tr>
+			<td>Transaction Amount:</td>
+			<td><b>RM 125.99</b></td>
+		</tr>
+		<tr>
+			<td>Transaction Date:</td>
+			<td><b>19/9/2020</b></td>
+		</tr>
+	</table>
+	
+	<br>
+	<br>
+
+	<div style="text-align: center;"><a href="#">Continue</a></div>
+	
+	<br><hr>
+		
+</body>
+</html>

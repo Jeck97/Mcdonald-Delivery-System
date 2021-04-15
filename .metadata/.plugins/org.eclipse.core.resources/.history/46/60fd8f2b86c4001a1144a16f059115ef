@@ -1,0 +1,113 @@
+<%@page import="mcdelivery.model.Account"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
+<%
+	// Get account for displaying information
+	Account account = (Account) session.getAttribute("account");
+			
+	// Get amount
+	String amount = String.format("%.2f", session.getAttribute("amount"));
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Receipt Page</title>
+</head>
+<body>
+
+	<h1>Bank Service Receipt</h1>
+
+	<h3>
+		Transaction has successfully processed.<br> 
+	</h3>
+
+	<hr>
+
+	<table style="align-content: space-between; width: 320px; height: 100px;">
+		<tr>
+			<td><label for="account_number">Account Number:</label></td>
+			<td><input id="account_number" name="account_number"
+				type="number" value="${account_number}" required></td>
+		</tr>
+
+	</table>
+	
+	<br>
+	<br>
+
+	<%
+		// Get the total amount before and after tax
+		String amountBeforeTax = String.format("%.2f", order.getAmountBeforeTax());
+		String serviceTax = String.format("%.2f", order.getServiceTax());
+		String amountAfterTax = String.format("%.2f", order.getAmountAfterTax());
+	%>
+
+	<table>
+		<tr>
+			<td>Total Amount (before tax)</td>
+			<td>: <b>RM <%=amountBeforeTax%></b></td>
+		</tr>
+		<tr>
+			<td>Service Tax (6%)</td>
+			<td>: <b>RM <%=serviceTax%></b></td>
+		</tr>
+		<tr>
+			<td>Total Amount (after tax)</td>
+			<td>: <b> RM <%=amountAfterTax%></b></td>
+		</tr>
+	</table>
+	
+	<br>
+
+	<span>This order is made on <b><%=LocalDate.now().toString()%></b></span><br>
+	
+	<hr style="width:50%; text-align:left;">
+
+	<form action="paymentServlet" method="post">
+	
+		<h3>Customer Information</h3>
+
+		<table>
+			<tr>
+				<td>Customer Name</td>
+				<td>: <b><%= customer.getName() %></b></td>
+			</tr>
+			<tr>
+				<td>Delivery Address</td>
+				<td>: <b><%=customer.getAddress1()%>,</b></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>&nbsp;&nbsp;<b><%=customer.getAddress2()%>,</b></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>&nbsp;&nbsp;<b><%=customer.getPostcode()%>, <%=customer.getArea()%>,</b></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>&nbsp;&nbsp;<b><%=customer.getState()%>.</b></td>
+			</tr>
+			<tr>
+				<td><label>Payment Method</label></td>
+				<td>: <b><%= (order.getPaymentMethod() ==  1) ? "McWallet" : "Interbank"%></b></td>
+			</tr>
+		</table>
+		
+		<br>
+		
+		<p style="font-size:20px">
+			<b>McWallet Balance: RM <%= String.format("%.2f", customer.getMcWalletBalance()) %></b>
+		</p>
+		
+		<br><br>
+		
+		<a href="paymentServlet">Back to Order Page</a>
+		
+	</form>
+
+</body>
+</html>

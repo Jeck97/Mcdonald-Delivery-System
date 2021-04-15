@@ -1,0 +1,23 @@
+package bank.rest.controller.generator;
+
+import bank.rest.model.Bank;
+
+public class BankDataGenerator {
+
+	protected Bank getMaybank() {
+		
+		
+		return bank;
+		
+	}
+	
+	private Bank getBank(String bankName) {
+		
+		Bank bank = new Bank();
+		bank.setName(bankName);
+		
+		return bank;
+		
+	}
+	
+}

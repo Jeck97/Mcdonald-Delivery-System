@@ -1,0 +1,87 @@
+package controller.handler;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import controller.facade.ProductFacade;
+import model.Order;
+import model.OrderedProduct;
+import model.Product;
+
+/**
+ * This class implements the business logic to handle the order placed 
+ * by the customer.
+ * @author Tiang King Jeck
+ *
+ */
+public class OrderHandler {
+
+	private static final double taxRate = 0.06;
+
+
+	/**
+	 * This method computes the total amount of the order
+	 * @param subTotal
+	 * @param tax
+	 * @return total amount
+	 */
+	private double getAmountAfterTax(double subTotal, double tax) {
+
+		return subTotal + tax;
+
+	}
+
+
+	/**
+	 * This method computes service tax of a total amount of order
+	 * @param subTotal
+	 * @return service tax
+	 */
+	private double getServiceTax(double subTotal) {
+
+		return subTotal * serviceTaxRate;
+	}
+
+
+	/**
+	 * This method computes the total amount of placed order
+	 * @param order
+	 * @return computed order
+	 */
+	public Order processOrder(Order order) {
+
+		// Compute total amount before tax
+		double amountBeforeTax
+		
+		List<OrderedProduct> orderedProducts = order.getOrderedProducts();
+		
+		for (OrderedProduct orderedProduct : orderedProducts) {
+
+			// Get product
+			ProductFacade productFacade = new ProductFacade();
+			Product product = orderedProduct.getProduct();
+			product = productFacade.selectProduct(product);
+			orderedProduct.setProduct(product);
+
+			// Get total amount
+			total = orderedProduct.getQuantity() * product.getPrice();
+			subTotal += total;
+
+		}
+
+		// Compute total amount
+		double serviceTax = this.getServiceTax(subTotal);
+		double totalAmount = this.getTotalAmount(subTotal, serviceTax);
+
+		// Wrap the into order
+		order.setOrderedProducts(orderedProducts);
+		order.setServiceTax(serviceTax);
+		order.setTotalQuantity(totalQuantity);
+		order.setTotalAmount(totalAmount);
+		order.setOrderDate(LocalDate.now());
+
+		return order;
+
+	}
+
+}

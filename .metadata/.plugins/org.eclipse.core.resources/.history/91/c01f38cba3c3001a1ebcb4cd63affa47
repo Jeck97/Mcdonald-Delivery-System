@@ -1,0 +1,104 @@
+package controller.manager;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import controller.connector.DbConnector;
+import model.Customer;
+
+public class OrderDataManager {
+
+	// Declare database connector object
+	private DbConnector dbConn;
+
+	// Declare closable SQL objects
+	private Connection conn;
+	private Statement stmt;
+	private PreparedStatement preStmt;
+	private ResultSet results;
+
+	/**
+	 * The constructor initializes the database connector object
+	 */
+	public CustomerDataManager() {
+		dbConn = new DbConnector();
+	}
+
+
+	/**
+	 * This method adds a new customer into database
+	 * @param customer
+	 * @return customer ID
+	 */
+	public int addCustomer(Customer customer) {
+
+		// Define customer ID with 0
+		int customerId = 0;
+
+		// Form a SQL string
+		String sql = "INSERT INTO customer(Name, Address1, Address2, Postcode, "
+				+ "Area, State, Username, Password) "
+				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+
+		try {
+
+			// Establish connection
+			conn = dbConn.getConnection();
+
+			// Set parameters and execute the SQL
+			preStmt = conn.prepareStatement(sql, 
+					PreparedStatement.RETURN_GENERATED_KEYS);
+			preStmt.setString(1, customer.getName());
+			preStmt.setString(2, customer.getAddress1());
+			preStmt.setString(3, customer.getAddress2());
+			preStmt.setInt(4, customer.getPostcode());
+			preStmt.setString(5, customer.getArea());
+			preStmt.setString(6, customer.getState());
+			preStmt.setString(7, customer.getUsername());
+			preStmt.setString(8, customer.getPassword());
+			preStmt.executeUpdate();
+
+			// Get auto generated key
+			results = preStmt.getGeneratedKeys();
+
+			// Set the key as the customer ID
+			while(results.next())
+				customerId = results.getInt(1);
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeSqlObjects();
+		}
+
+		return customerId;
+
+	}
+
+
+	/**
+	 * This method closes all closable SQL objects
+	 */
+	private void closeSqlObjects() {
+
+		try {
+
+			if(results != null)
+				results.close();
+			if(preStmt != null)
+				preStmt.close();
+			if(stmt != null)
+				stmt.close();
+			if(conn != null)
+				conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+}

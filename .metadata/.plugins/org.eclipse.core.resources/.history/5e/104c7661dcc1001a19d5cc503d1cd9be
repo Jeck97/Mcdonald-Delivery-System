@@ -1,0 +1,19 @@
+package controller.validator.exception;
+
+/**
+ * This class throws an exception if the user's account 
+ * does not exist in database
+ * @author Tiang King Jeck
+ *
+ */
+public class UserAccountNotFoundException extends Exception {
+	
+	private static final long serialVersionUID = 1L;
+	
+	public UserAccountNotFoundException(String username) {
+		
+		super("user " + username + " does not exist");
+		
+	}
+
+}

@@ -1,0 +1,18 @@
+package controller.validator.exception;
+
+/**
+ * This class throws an exception if the field is more than maximum characters
+ * @author Tiang King Jeck
+ *
+ */
+public class MaximumLengthException extends Exception {
+
+	private static final long serialVersionUID = 1L;
+
+	public MaximumLengthException(String field, int maximum) {
+		
+		super(field + " must be not more than " + maximum + " characters");
+		
+	}
+
+}

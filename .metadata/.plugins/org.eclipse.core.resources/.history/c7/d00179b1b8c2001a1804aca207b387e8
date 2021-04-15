@@ -1,0 +1,71 @@
+package controller.servlet;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class LogoutServlet
+ */
+@WebServlet("/logout/logoutServlet")
+public class LogoutServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public LogoutServlet() {
+        super();
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// Get the URI from request
+		String previousPath = request.getRequestURI();
+		
+		// Set the URI into session
+		request.getSession().setAttribute("previousPath", previousPath);
+		System.out.println(previousPath);
+		
+		String pathTrace = request.getHeader("referer");
+		System.out.println(pathTrace);
+		
+		String haha = request.getLocalName();
+		System.out.println(haha);
+		
+		haha = request.getPathInfo();
+		System.out.println(haha);
+		
+		haha = request.getPathTranslated();
+		System.out.println(haha);
+		
+		haha = request.getServletPath();
+		System.out.println(haha);
+		
+		haha = request.getQueryString();
+		System.out.println(haha);
+		
+		haha = request.getPathTranslated();
+		System.out.println(haha);
+
+		
+		// Redirect to logout page
+		response.sendRedirect("logoutConfirmation.jsp");
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+}

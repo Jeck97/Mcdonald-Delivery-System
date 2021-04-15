@@ -1,0 +1,71 @@
+package mcdelivery.controller.servlet;
+
+import java.io.IOException;
+
+import javax.security.auth.login.AccountNotFoundException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+
+import mcdelivery.controller.handler.BankServiceHandler;
+import mcdelivery.controller.validator.exception.AccountAutenticateFailedException;
+import mcdelivery.controller.validator.exception.AccountBalanceInsufficientException;
+import mcdelivery.model.Account;
+
+/**
+ * Servlet implementation class TransactionServlet
+ */
+@WebServlet("/bankService/transactionServlet")
+public class TransactionServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public TransactionServlet() {
+        super();
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// get account number and password from form
+		long accountNumber = Long.parseLong(request.getParameter("account_number"));
+		String password = request.getParameter("password");
+		
+		// Get amount from session
+		HttpSession session = request.getSession();
+		double amount = Double.parseDouble(session.getAttribute("amount").toString());
+		
+		try {
+			
+			BankServiceHandler bankHandler = new BankServiceHandler();
+			Account account = bankHandler.transaction(accountNumber, password, amount);
+			
+		} catch (AccountNotFoundException | AccountAutenticateFailedException
+				| AccountBalanceInsufficientException e1) {
+			
+			e.printStackTrace();
+			
+		}
+		
+		
+		
+		
+	}
+
+}

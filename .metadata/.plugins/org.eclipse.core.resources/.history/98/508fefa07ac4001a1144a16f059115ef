@@ -1,0 +1,28 @@
+package mcdelivery.controller.handler;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+
+import mcdelivery.model.Account;
+
+public class BankServiceHandler {
+	
+	private static final String url = "http://localhost:8080/BankServiceProvider/service/bank";
+	
+	private Client client;
+	private WebTarget webTarget;
+	
+	public BankServiceHandler() {
+		
+		// Create JAX-RS client
+		client = ClientBuilder.newClient();
+		
+		// Get WebTarget for URL
+		webTarget = client.target(url);
+		
+	}
+	
+	public Account transaction()
+
+}

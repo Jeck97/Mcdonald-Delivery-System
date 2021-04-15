@@ -1,0 +1,56 @@
+<%@page import="mcdelivery.model.Customer"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
+<%
+	// Get the customer from session
+	Customer customer = (Customer) request.getSession().getAttribute("customer");
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>McDelivery Reload McWallet</h1>
+	
+	<span style="font-size:20px;"><%= customer.getUsername() %></span>
+	
+	<a href="../logout/logoutServlet" style="font-size:20px; float:right;"><button>Logout</button></a>
+	
+	<p>
+		Please enter the amount you want to reload.<br>
+		Click <b>Reload</b> button to reload the McWallet.<br>
+		Click <b>Back</b> to return to previous page.
+	</P>
+	
+	<hr>
+	
+	<form action="loginServlet" method="post">
+	
+		<div style="color: #FF0000;">${errorMessage}</div><br>
+
+		<label>Username:</label> 
+		<input type="text" name="username" value="${username}" required autofocus="autofocus"><br><br> 
+		
+		<label>Password:</label>
+		<input type="password" name="password" required><br><br><br><br>
+		
+		<input type="submit" value="Login">
+
+	</form>
+
+	<br>
+	
+	<a href="../register/registerForm.jsp">Register a new account</a>
+	
+	<% 
+		session.removeAttribute("errorMessage"); 
+		session.removeAttribute("username");
+	%>
+	
+</body>
+</html>

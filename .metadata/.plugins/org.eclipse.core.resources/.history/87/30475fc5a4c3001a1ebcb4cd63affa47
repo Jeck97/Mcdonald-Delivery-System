@@ -1,0 +1,18 @@
+package controller.facade;
+
+import controller.manager.OrderDataManager;
+
+public class OrderFacade {
+	
+	// Declare OrderDataManager object
+	private OrderDataManager orderDataMgr;
+
+
+	/**
+	 * The constructor initializes the OrderDataManager object
+	 */
+	public OrderFacade() {
+		orderDataMgr = new OrderDataManager();
+	}
+
+}

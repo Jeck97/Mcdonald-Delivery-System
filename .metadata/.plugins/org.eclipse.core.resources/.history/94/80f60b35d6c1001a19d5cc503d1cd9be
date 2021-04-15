@@ -1,0 +1,175 @@
+package controller.validator;
+
+import controller.facade.CustomerFacade;
+import controller.validator.exception.InvalidNumberException;
+import controller.validator.exception.LoginFailedException;
+import controller.validator.exception.MaximumLengthException;
+import controller.validator.exception.MaximumNumberException;
+import controller.validator.exception.MinimumNumberException;
+import controller.validator.exception.RequiredFieldException;
+import controller.validator.exception.UserAccountNotFoundException;
+import model.Customer;
+
+public class Validator {
+	
+	
+	/**
+	 * This static method validates whether the field is required
+	 * and the maximum length of input text
+	 * @param field
+	 * @param value
+	 * @param required
+	 * @param length
+	 * @return Validated text
+	 * @throws RequiredFieldException
+	 * @throws MaximumLengthException
+	 */
+	public static String validateText(String field, String value, boolean required, int length) 
+			throws RequiredFieldException, MaximumLengthException {
+		
+		// Remove leading and trailing whitespace
+		value = value.trim();
+		
+		// Throw exception if the field is required but empty
+		if(required && value.isEmpty())
+			throw new RequiredFieldException(field);
+		
+		// Throw exception if the input length is more than maximum length
+		if(value.length() > length)
+			throw new MaximumLengthException(field, length);
+		
+		return value;
+		
+	}
+	
+	
+	/**
+	 * This static method validates whether the field is required
+	 * and the range of Integer number
+	 * @param field
+	 * @param value
+	 * @param required
+	 * @param minimum
+	 * @param maximum
+	 * @return Validated Integer number
+	 * @throws RequiredFieldException
+	 * @throws InvalidNumberException
+	 * @throws MinimumNumberException
+	 * @throws MaximumNumberException
+	 */
+	public static int validateNumber(String field, String value, boolean required, int minimum, int maximum) 
+			throws RequiredFieldException, InvalidNumberException, MinimumNumberException, MaximumNumberException {
+		
+		// Remove leading and trailing whitespace
+		value = value.trim();
+		
+		// Throw exception if the field is required but empty
+		if (required && value.isEmpty())
+			throw new RequiredFieldException(field);
+		
+		int number = 0;
+		
+		try {
+			
+			// Parse the input value to Integer
+			number = Integer.parseInt(value);
+			
+		} catch (NumberFormatException e) {
+			
+			// Throw exception if the value is not an Integer
+			throw new InvalidNumberException(field);
+			
+		}
+		
+		// Throw exception if the number is less than minimum value
+		if (number < minimum)
+			throw new MinimumNumberException(field, minimum);
+		
+		// Throw exception if the number is more than maximum value
+		if (number > maximum)
+			throw new MaximumNumberException(field, maximum);
+		
+		return number;
+		
+	}
+	
+	
+	
+	/**
+	 * This static method validates whether the field is required
+	 * and the range of Integer number
+	 * @param field
+	 * @param value
+	 * @param required
+	 * @param minimum
+	 * @param maximum
+	 * @return Validated Double number
+	 * @throws RequiredFieldException
+	 * @throws InvalidNumberException
+	 * @throws MinimumNumberException
+	 * @throws MaximumNumberException
+	 */
+	public static double validateNumber(String field, String value, boolean required, double minimum, double maximum)
+			throws RequiredFieldException, InvalidNumberException, MinimumNumberException, MaximumNumberException {
+		
+		// Remove leading and trailing whitespace
+		value = value.trim();
+		
+		// Throw exception if the field is required but empty
+		if (required && value.isEmpty())
+			throw new RequiredFieldException(field);
+		
+		double number = 0;
+		
+		try {
+			
+			// Parse the input value to Double
+			number = Double.parseDouble(value);
+			
+		} catch (NumberFormatException e) {
+			
+			// Throw exception if the value is not an Double
+			throw new InvalidNumberException(field);
+			
+		}
+		
+		// Throw exception if the number is less than minimum value
+		if (number < minimum)
+			throw new MinimumNumberException(field, minimum);
+		
+		// Throw exception if the number is less than minimum value
+		if (number > maximum)
+			throw new MaximumNumberException(field, maximum);
+		
+		return number;
+		
+	}
+
+	
+	/**
+	 * This static method validates the login process of the visitor
+	 * @param customer
+	 * @return Validated customer
+	 * @throws UserAccountNotFoundException
+	 * @throws LoginFailedException
+	 */
+	public static Customer validateLogin(Customer customer) 
+			throws UserAccountNotFoundException, LoginFailedException {
+		
+		// Get the customer from database by username
+		CustomerFacade customerFacade = new CustomerFacade();
+		Customer dbCustomer = customerFacade.selectCustomer(customer);
+		
+		// Throw exception if the username not found in database
+		if(dbCustomer.getId() == 0)
+			throw new UserAccountNotFoundException(customer.getUsername());
+		 
+		// Throw exception if the password does not match
+		if(!customer.getPassword().equals(dbCustomer.getPassword()))
+			throw new LoginFailedException();
+		
+		return dbCustomer;
+		
+	}
+
+}

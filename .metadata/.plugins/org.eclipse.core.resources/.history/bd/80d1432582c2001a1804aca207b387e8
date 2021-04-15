@@ -1,0 +1,75 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Register Page</title>
+</head>
+<body>
+
+	<h1>McDelivery Registration</h1>
+	
+	<p>
+		Please enter the information below.<br>
+		Click <b>Register</b> button to register a new McDelivery account.<br>
+		Click <b>Back to Login Page</b> to the Login Page.
+	</p>
+
+	<form action="registerServlet" method="post">
+	
+		<div style="color: #FF0000;">${errorMessage}</div><br>
+		
+		<table>
+			<tr>
+				<td><label>Name:</label></td> 
+				<td><input type="text" name="name" value="${name}" maxlength="45" title="Full name" ></td>
+			</tr>
+			
+			<tr>
+				<td><label>Address 1:</label></td>
+				<td><input type="text" name="address1" value="${address1}" maxlength="100" required></td>
+			</tr>
+			
+			<tr>
+				<td><label>Address 2:</label></td> 
+				<td><input type="text" name="address2" value="${address2}" maxlength="100" required></td>
+			</tr> 
+			
+			<tr>
+				<td><label>Postcode:</label></td> 
+				<td><input type="number" name="postcode" value="${postcode}" min="1000" max="99999" required></td>
+			</tr> 
+			
+			<tr>
+				<td><label>Area:</label></td> 
+				<td><input type="text" name="area" value="${area}" maxlength="45" required></td>
+			</tr> 
+			
+			<tr>
+				<td><label>State:</label></td> 
+				<td><input type="text" name="state" value="${state}" maxlength="45" required></td>
+			</tr> 
+			
+			<tr>
+				<td><label>Username:</label></td> 
+				<td><input type="text" name="username" value="${username}" maxlength="20" required></td>
+			</tr> 
+			
+			<tr>
+				<td><label>Password:</label></td>
+				<td><input type="password" name="password" maxlength="20" required></td>
+			</tr>
+		</table>
+		
+		<br><br>
+		<input type="submit" value="Register">
+
+	</form>
+
+	<br>
+	
+	<a href="../login/loginForm.jsp">Back to Login Page</a>
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+package bank.rest.controller.manager;
+
+public class AccountDataManager {
+
+}

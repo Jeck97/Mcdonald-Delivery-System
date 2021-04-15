@@ -1,0 +1,13 @@
+package bank.rest.controller.generator;
+
+import bank.rest.model.Account;
+
+public class AccountDataGenerator {
+	
+	public Account getAliAccount() {
+		
+		
+		
+	}
+
+}

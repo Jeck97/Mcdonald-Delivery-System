@@ -1,0 +1,10 @@
+package bank.rest.controller.manager;
+
+/**
+ * This class manages the accounts in banks.
+ * @author Tiang King Jeck
+ *
+ */
+public class AccountDataManager {
+
+}

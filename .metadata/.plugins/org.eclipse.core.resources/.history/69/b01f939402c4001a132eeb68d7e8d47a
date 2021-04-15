@@ -1,0 +1,31 @@
+package bank.rest.controller.manager;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import bank.rest.controller.generator.AccountDataGenerator;
+import bank.rest.model.Account;
+
+/**
+ * This class manages the accounts in banks.
+ * @author Tiang King Jeck
+ *
+ */
+public class AccountDataManager {
+	
+	private List<Account> getBankAccounts() {
+		
+		List<Account> accounts = new ArrayList<Account>();
+		
+		// Add each generated account into a list
+		AccountDataGenerator accountGenerator = new AccountDataGenerator();
+		accounts.add(accountGenerator.getArthurAccount());
+		accounts.add(accountGenerator.getHatsuneAccount());
+		accounts.add(accountGenerator.getTiangAccount());
+		accounts.add(accountGenerator.getYamamotoAccount());
+		
+		return accounts;
+		
+	}
+
+}

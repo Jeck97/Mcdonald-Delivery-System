@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insufficient Balance Page</title>
+</head>
+<body>
+
+	<h3>Oops! Your McWallet balance is insufficient.</h3>
+	
+	<a href="orderForm.jsp">Click to make an order</a>
+
+</body>
+</html>

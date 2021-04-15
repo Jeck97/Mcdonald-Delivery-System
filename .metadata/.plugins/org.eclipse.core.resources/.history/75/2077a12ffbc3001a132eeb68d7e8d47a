@@ -1,0 +1,40 @@
+package bank.rest.model;
+
+/**
+ * This class represents the model of account
+ * @author Tiang King Jeck
+ *
+ */
+public class Account {
+	
+	private long accountNumber;
+	private String holderName;
+	private String bank;
+	private double balanceAmount;
+	
+	public long getAccountNumber() {
+		return accountNumber;
+	}
+	public void setAccountNumber(long accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+	public String getHolderName() {
+		return holderName;
+	}
+	public void setHolderName(String holderName) {
+		this.holderName = holderName;
+	}
+	public String getBank() {
+		return bank;
+	}
+	public void setBank(String bank) {
+		this.bank = bank;
+	}
+	public double getBalanceAmount() {
+		return balanceAmount;
+	}
+	public void setBalanceAmount(double balanceAmount) {
+		this.balanceAmount = balanceAmount;
+	}
+
+}

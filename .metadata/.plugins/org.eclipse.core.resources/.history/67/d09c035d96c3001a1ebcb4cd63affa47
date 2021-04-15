@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insufficient Balance Page</title>
+</head>
+<body>
+
+	<h3>Oops! Your McWallet balance is insufficient.</h3>
+
+	<br>
+
+	<form action="paymentServlet" method="post">
+
+		<input type="hidden" name="payment_method" value="2"> 
+		
+		<a href="../reloadMcWallet/reloadForm.jsp">
+			<button type="button">Reload McWallet</button>
+		</a> &nbsp; 
+		
+		<input type="submit" value="Use Interbank to Pay">
+
+		<br><br> 
+		
+		<a href="checkOutPage.jsp">Back to Cart</a>
+
+	</form>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+package controller.validator.exception;
+
+/**
+ * This class throws an exception if the field is empty
+ * @author Tiang King Jeck
+ *
+ */
+public class RequiredFieldException extends Exception {
+	
+	private static final long serialVersionUID = 1L;
+
+	public RequiredFieldException(String field) {
+		
+		super(field + " cannot be empty");
+		
+	}
+
+}

@@ -1,0 +1,8 @@
+package mcdelivery.controller.handler;
+
+public class BankServiceHandler {
+	
+	private Client client;
+	
+
+}

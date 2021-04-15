@@ -1,0 +1,5 @@
+package mcdelivery.controller.validator.exception;
+
+public class AccountBalanceInsufficientException {
+
+}

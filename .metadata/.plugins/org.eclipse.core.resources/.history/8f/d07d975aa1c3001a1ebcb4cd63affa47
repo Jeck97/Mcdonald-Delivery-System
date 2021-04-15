@@ -1,0 +1,64 @@
+package controller.handler;
+
+import model.Customer;
+import model.Order;
+
+/**
+ * This class handles the payment process from customer
+ * @author Tiang King Jeck
+ *
+ */
+public class PaymentHandler {
+	
+	public static final int MCWALLET = 1;
+	public static final int INTERBANK = 2;
+	
+	
+	/**
+	 * 
+	 * @param customer
+	 * @param order
+	 * @return order number
+	 */
+	public int processPayment(Customer customer, Order order) {
+		
+		int orderNumber = 0;
+		
+		if(order.getPaymentMethod() == MCWALLET) {
+			
+			// Get new balance of McWallet
+			double newMcWalletBalance = this.getNewMcWalletBalance
+					(customer.getMcWalletBalance(), order.getAmountAfterTax());
+			
+			// Set the new balance to customer
+			customer.setMcWalletBalance(newMcWalletBalance);
+			
+			// Update the new balance to database
+			this.updateMcWalletBalance(newMcWalletBalance);
+
+		}
+		
+
+		return orderNumber;
+		
+	}
+	
+	
+	/**
+	 * This method computes the new balance of McWallet
+	 * after purchasing the order
+	 * @param currentBalance
+	 * @param amountAftertax
+	 * @return new balance of McWallet
+	 */
+	private double getNewMcWalletBalance(double currentBalance, double amountAftertax) {
+		
+		return currentBalance - amountAftertax;
+		
+	}
+	
+	private void updateMcWalletBalance(double newMcWalletBalance) {
+		
+	}
+
+}

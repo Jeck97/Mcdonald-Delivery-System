@@ -1,0 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Login Page</title>
+</head>
+<body>
+
+	<h1>McDelivery Login</h1>
+
+	<form action="loginServlet" method="post">
+	
+		<div style="color: #FF0000;">${errorMessage}</div><br>
+	
+		<label>Username:</label> 
+		<input type="text" name="username" value="${username}" maxlength="20" required><br><br> 
+		
+		<label>Password:</label>
+		<input type="password" name="password" value="${password}" required><br><br>
+		
+		<br><br>
+		<input type="submit" value="Login">
+
+	</form>
+
+	<br><a href="../register/registerForm.jsp">Register a new account</a>
+
+</body>
+</html>

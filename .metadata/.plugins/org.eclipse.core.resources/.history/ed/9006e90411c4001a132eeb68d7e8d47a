@@ -1,0 +1,27 @@
+package bank.rest.controller.validator;
+
+import bank.rest.model.Account;
+
+public class TransactionValidator {
+	
+	private Account account;
+	
+	public TransactionValidator(Account account) {
+		
+		this.account = account;
+		
+	}
+	
+	public boolean isPasswardMatch(String password) {
+		
+		return password.equals(account.getPassword());
+		
+	}
+	
+	public boolean isBalanceSufficient(double amountToPay) {
+	
+		return account.getBalanceAmount() >= amountToPay;
+		
+	}
+
+}

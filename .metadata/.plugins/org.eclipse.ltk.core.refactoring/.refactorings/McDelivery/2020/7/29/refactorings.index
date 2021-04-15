@@ -1,0 +1,13 @@
+1594526243898	Rename package 'controller.connector'
+1594526276154	Rename package 'controller.facade'
+1594526281770	Rename package 'controller.handler'
+1594526296256	Rename package 'controller.manager'
+1594526303576	Rename package 'controller.servlet'
+1594526324700	Rename package 'controller.validator.exception'
+1594526330675	Rename package 'controller.validator'
+1594526337988	Rename package 'model'
+1594526347088	Rename package 'view'
+1594583216349	Delete elements
+1594626599008	Delete element
+1594626673384	Delete element
+1594629378285	Delete element

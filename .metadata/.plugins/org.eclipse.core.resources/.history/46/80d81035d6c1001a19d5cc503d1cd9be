@@ -1,0 +1,31 @@
+package controller.facade;
+
+import controller.manager.TypeDataManager;
+import model.Type;
+
+public class TypeFacade {
+	
+	// Declare TypeDataManager object
+	private TypeDataManager typeDataMgr;
+	
+	
+	/**
+	 * The constructor initializes the TypeDataManager object
+	 */
+	public TypeFacade() {
+		typeDataMgr = new TypeDataManager();
+	}
+	
+	
+	/**
+	 * This method adds a new type into database
+	 * @param type
+	 * @return type ID
+	 */
+	public int addType(Type type) {
+		
+		return typeDataMgr.addType(type);
+		
+	}
+
+}

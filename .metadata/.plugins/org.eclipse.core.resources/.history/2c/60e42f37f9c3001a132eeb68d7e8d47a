@@ -1,0 +1,47 @@
+/**
+ * 
+ */
+package bank.rest.controller.ws;
+
+import java.util.Set;
+
+import org.glassfish.jersey.server.ResourceConfig;
+
+/**
+ * @author USER
+ *
+ */
+public class RESTProvider extends ResourceConfig {
+
+	/**
+	 * 
+	 */
+	public RESTProvider() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param classes
+	 */
+	public RESTProvider(Set<Class<?>> classes) {
+		super(classes);
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param classes
+	 */
+	public RESTProvider(Class<?>... classes) {
+		super(classes);
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param original
+	 */
+	public RESTProvider(ResourceConfig original) {
+		super(original);
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+<typeInfo handle="=BankServiceProvider/C:\/Users\/USER\/apache-tomcat-8.5.54\/lib\/catalina.jar=/owner.project.facets=/jst.web=/=/javadoc_location=/https:\/\/tomcat.apache.org\/tomcat-8.5-doc\/api\/=/&lt;org.apache.catalina.valves.rewrite(RewriteCond$ResourceCondition.class[ResourceCondition" modifiers="9" timestamp="1585897650000"/>
+<typeInfo handle="=BankServiceProvider/C:\/Users\/USER\/.m2\/repository\/org\/glassfish\/jersey\/core\/jersey-server\/2.26\/jersey-server-2.26.jar=/maven.pomderived=/true=/=/org.eclipse.jst.component.dependency=/\/WEB-INF\/lib=/=/maven.pomderived=/true=/=/org.eclipse.jst.component.archivename=/jersey-server-2.26.jar=/=/maven.groupId=/org.glassfish.jersey.core=/=/maven.artifactId=/jersey-server=/=/maven.version=/2.26=/=/maven.scope=/compile=/&lt;org.glassfish.jersey.server(ResourceConfig.class[ResourceConfig" modifiers="33" timestamp="1593269148854"/>
+</typeInfoHistroy>

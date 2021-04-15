@@ -1,0 +1,8 @@
+package bank.rest.controller.service;
+
+import javax.ws.rs.Path;
+
+@Path("/bank")
+public class BankService {
+
+}

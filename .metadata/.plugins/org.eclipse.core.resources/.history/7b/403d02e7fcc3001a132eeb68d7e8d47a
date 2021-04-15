@@ -1,0 +1,5 @@
+package bank.rest.controller.generator;
+
+public class BankDataGenerator {
+
+}

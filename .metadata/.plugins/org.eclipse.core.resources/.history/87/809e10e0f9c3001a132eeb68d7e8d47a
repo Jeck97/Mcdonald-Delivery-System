@@ -1,0 +1,9 @@
+package bank.rest.model;
+
+public class Account {
+
+	public Account() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

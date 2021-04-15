@@ -1,0 +1,159 @@
+package controller.manager;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import controller.connector.DbConnector;
+import model.Product;
+
+public class ProductDataManager {
+
+	// Declare database connector object
+	private DbConnector dbConn;
+
+	// Declare closable SQL objects
+	private Connection conn;
+	private Statement stmt;
+	private PreparedStatement preStmt;
+	private ResultSet results;
+	
+
+	/**
+	 * The constructor initializes the database connector object
+	 */
+	public ProductDataManager() {
+		dbConn = new DbConnector();
+	}
+
+
+	/**
+	 * This method adds a new product into database
+	 * @param product
+	 * @return product ID
+	 */
+	public int addProduct(Product product) {
+
+		// Define product ID with 0
+		int productId = 0;
+
+		// Form a SQL string
+		String sql = "INSERT INTO product(Name, Price, Type)"
+				+ "VALUES(?, ?, ?)";
+
+		try {
+
+			// Establish connection
+			conn = dbConn.getConnection();
+
+			// Set parameters and execute the SQL
+			preStmt = conn.prepareStatement(sql, 
+					PreparedStatement.RETURN_GENERATED_KEYS);
+			preStmt.setString(1, product.getName());
+			preStmt.setDouble(2, product.getPrice());
+			preStmt.setInt(3, product.getType().getId());
+			preStmt.executeUpdate();
+
+			// Get auto generated key
+			results = preStmt.getGeneratedKeys();
+
+			// Set the key as the product ID
+			while(results.next())
+				productId = results.getInt(1);
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeSqlObjects();
+		}
+
+		return productId;
+
+	}
+
+
+	/**
+	 * This method selects a list of products from the database
+	 * @return List of products
+	 */
+	public List<Product> selectProducts() {
+
+		// Declare and initialize the product list
+		List<Product> products = new ArrayList<Product>();
+
+		// Form a SQL string
+		String sql = "SELECT p.ProductId, p.Name, p.Price, p.Type, t.Name "
+				+ "FROM product p JOIN type t ON p.type = t.TypeId "
+				+ "ORDER BY p.ProductId";
+
+		try {
+
+			// Establish connection
+			conn = dbConn.getConnection();
+			
+			// Execute SQL
+			stmt = conn.createStatement();
+			results = stmt.executeQuery(sql);
+
+			// Wrap results in the list
+			while(results.next()) {
+
+				System.out.print(results.getInt(1));
+				System.out.print(results.getString(2));
+				System.out.print(results.getDouble(3));
+				System.out.print(results.getInt(4));
+				System.out.print(results.getString(5));
+
+				
+//				// Wrap result in product object
+//				Product product = new Product();
+//				product.setId(results.getInt(1));
+//				product.setName(results.getString(2));
+//				product.setPrice(results.getDouble(3));
+//				product.getType().setId(results.getInt(4));
+//				product.getType().setName(results.getString(5));
+//				
+//				// Add into list
+//				products.add(product);
+				
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeSqlObjects();
+		}
+
+		return products;
+
+	}
+
+
+	/**
+	 * This method closes all closable SQL objects
+	 */
+	private void closeSqlObjects() {
+
+		try {
+			
+			if(results != null)
+				results.close();
+			if(preStmt != null)
+				preStmt.close();
+			if(stmt != null)
+				stmt.close();
+			if(conn != null)
+				conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+
+}
